@@ -9,40 +9,40 @@
     <body>
         <div id="Conteneur">
             <div class="threadMenu">
-                <form id="inscription" action="Inscription_Reussi.php" method="post" >
+                <form id="inscription" action="Formulaire_insertion.php" method="post" >
                     <fieldset>
                         <legend>
                             Formulaire d'inscription
                         </legend>
-                            <p>Nom :</p>
-                            
-                            <p><input type="text" name="nom" id="nom" placeholder="Nom" required autofocus /></p>
+                        <p>Nom :</p>
 
-                            <p>Prénom :</p>
+                        <p><input type="text" name="nom" id="nom" placeholder="Nom" required autofocus /></p>
 
-                            <p><input type="text" name="prenom" id="prenom" placeholder="Prénom" required autofocus /></p>
+                        <p>Prénom :</p>
 
-                            <p>Pseudonyme :</p>
+                        <p><input type="text" name="prenom" id="prenom" placeholder="Prénom" required autofocus /></p>
 
-                            <p><input type="text" name="pseudo" id="pseudo" placeholder="Pseudonyme" required autofocus /></p>
+                        <p>Pseudonyme :</p>
 
-                            <p>Email :</p>
+                        <p><input type="text" name="pseudo" id="pseudo" placeholder="Pseudonyme" required autofocus /></p>
 
-                            <p><input type="email"  name="email" id="email" placeholder="email@mondomaine.com" required autofocus/></p>
+                        <p>Email :</p>
 
-                            <p>Mot de passe :</p>
+                        <p><input type="email"  name="email" id="email" placeholder="email@mondomaine.com" required autofocus/></p>
 
-                            <p><input type="password" name="password" id="password" placeholder="" required autofocus/></p>
+                        <p>Mot de passe :</p>
 
-                            <p>Date de naissance :</p>
+                        <p><input type="password" name="password" id="password" placeholder="" required autofocus/></p>
 
-                            <p><input type="date" name="age" id="age" placeholder="Votre âge"/></p>
+                        <p>Date de naissance :</p>
 
-                            <p>Description :</p>
+                        <p><input type="date" name="date" id="age" placeholder="Votre âge"/></p>
 
-                            <p><textarea name="message" cols="50" rows="10"></textarea></p>
+                        <p>Description :</p>
 
-                            <p><input type="submit" id="button" value="Envoyez"   /></p>
+                        <p><textarea name="description" cols="50" rows="10"><?php if (isset($_POST['description'])) echo htmlentities(trim($_POST['description'])); ?></textarea></p>
+
+                        <p><input type="submit" id="button" value="Envoyez"   /></p>
                     </fieldset>
                 </form>
             </div>
