@@ -1,0 +1,29 @@
+div 
+{
+    opacity: 0.9;
+}
+
+body
+{
+    background: url('./Fond_6.jpg');
+}
+
+#Conteneur
+{
+    margin: auto;
+    width: 900px;  
+}
+.threadMenu
+{ 
+    margin-top: 10px;
+    height: 860px;
+    font-family: sans-serif;
+    font-size: 15pt;
+    background-color: #45413B;
+    color: white;
+    padding-left: 15px;
+}
+input
+{
+    opacity: 1;
+}
