@@ -26,4 +26,5 @@ body
 input
 {
     opacity: 1;
+    display: block;
 }

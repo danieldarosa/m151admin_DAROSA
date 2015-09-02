@@ -17,25 +17,25 @@
                         </legend>
                         
                         <label for="Nom">Nom :</label>
-                        <input id="nom" type="text" name="nom" id="nom" placeholder="Nom" required autofocus />
+                        <input id="nom" type="text" name="nom" id="nom" placeholder="Nom" required autofocus /><br/>
 
                         <label for="Prénom">Prénom :</label>
-                        <input id="prenom" type="text" name="prenom" id="prenom" placeholder="Prénom" required autofocus />
+                        <input id="prenom" type="text" name="prenom" id="prenom" placeholder="Prénom" required autofocus /><br/>
 
                         <label for="Pseudo">Pseudonyme :</label>
-                        <input id="pseudo" type="text" name="pseudo" id="pseudo" placeholder="Pseudonyme" required autofocus />
+                        <input id="pseudo" type="text" name="pseudo" id="pseudo" placeholder="Pseudonyme" required autofocus /><br/>
 
                         <label for="Email">Email :</label>
-                        <input id="email" type="email"  name="email" id="email" placeholder="email@mondomaine.com" required autofocus/>
+                        <input id="email" type="email"  name="email" id="email" placeholder="email@mondomaine.com" required autofocus/><br/>
 
                         <label for="Password">Mot de passe :</label>
-                        <input id="password" type="password" name="password" id="password" placeholder="" required autofocus/>
+                        <input id="password" type="password" name="password" id="password" placeholder="" required autofocus/><br/>
 
                         <label for="DateNaissance">Date de naissance :</label>
-                        <input id="dateNaissance" type="date" name="date" id="age" placeholder="Votre âge"/>
+                        <input id="dateNaissance" type="date" name="date" id="age" placeholder="Votre âge"/><br/>
 
                         <label for="Description">Description :</label>
-                        <textarea id="description" name="description" cols="50" rows="10"><?php if (isset($_POST['description'])) echo htmlentities(trim($_POST['description'])); ?></textarea>
+                        <textarea id="description" name="description" cols="50" rows="10"><?php if (isset($_POST['description'])) echo htmlentities(trim($_POST['description'])); ?></textarea><br/>
 
                         <input id="envoyer" type="submit" id="button" value="Envoyez"   />
                     </fieldset>
