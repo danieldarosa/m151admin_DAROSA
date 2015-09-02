@@ -1,11 +1,25 @@
 <?php
-try {
-    $dbh = new PDO('mysql:host=127.0.0.1;dbname=m105 formulaire', 'root', '');
-} catch (PDOException $e) {
-    echo 'Connexion échouée';
+DEFINE("HOST", "127.0.0.1");
+DEFINE("DBNAME", "m151_formulaire");
+DEFINE("USERNAME", "root");
+DEFINE("PASSWORD", "");
+function GetConnection()
+{
+	static $dbh = null;
+	try {
+		if($dbh == null){
+			$dbh = new PDO('mysql:host='.HOST.';dbname='.DBNAME,USERNAME,PASSWORD);
+			}
+	} catch (PDOException $e) {
+		die('Erreur : ' .$e->getMessage());
+	}
+	return $dbh;
 }
 
-if (!empty($_POST['nom']) && (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) !== false)) {
+$dbh = GetConnection();
+
+/*if (!empty($_POST['nom']) && (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) !== false)) {
+	
     $nom = $_POST['nom'];
     $prenom = $_POST['prenom'];
     $pseudo = $_POST['pseudo'];
@@ -33,7 +47,7 @@ if (!empty($_POST['nom']) && (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)
 } else {
     //Si non, on affiche un message d'erreur
     echo 'Les champs remplis ne sont pas corrects...';
-}
+}*/
 ?>
 <!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
