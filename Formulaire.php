@@ -1,4 +1,3 @@
-
 <!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
     <head> 
@@ -39,6 +38,7 @@
                         <input id="envoyer" type="submit" name="envoyer" id="button" value="Envoyez"   />
                     </fieldset>
                 </form>
+                <a href="Lire_donnees.php">Voir les utilisateurs inscrits</a>
             </div>
         </div>
     </body>

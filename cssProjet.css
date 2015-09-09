@@ -22,6 +22,7 @@ body
     background-color: #45413B;
     color: white;
     padding-left: 15px;
+    overflow-y: scroll;
 }
 input
 {

@@ -1,20 +1,5 @@
 <?php
-DEFINE("HOST", "127.0.0.1");
-DEFINE("DBNAME", "m151_formulaire");
-DEFINE("USERNAME", "root");
-DEFINE("PASSWORD", "");
-
-function GetConnection() {
-    static $dbh = null;
-    try {
-        if ($dbh == null) {
-            $dbh = new PDO('mysql:host=' . HOST . ';dbname=' . DBNAME, USERNAME, PASSWORD);
-        }
-    } catch (PDOException $e) {
-        die('Erreur : ' . $e->getMessage());
-    }
-    return $dbh;
-}
+require_once 'Connexion.php';
 
 function InsertUser() {
     if (!empty($_REQUEST['nom'])) {
@@ -57,7 +42,7 @@ if (isset($_REQUEST['envoyer'])) {
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
     <head> 
         <meta http-equiv="content-type" content="test/html; charset=UTF-8" />
-        <title>Figurines Animés</title>
+        <title>Formulaire</title>
         <link href="./cssProjet.css" rel="stylesheet" type="text/css" media="all" charset="UTF-8"></link>
     </head>
 
