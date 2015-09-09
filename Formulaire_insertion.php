@@ -17,29 +17,27 @@ function GetConnection() {
 }
 
 function InsertUser() {
+    if (!empty($_REQUEST['nom'])) {
 
-    $dbh = GetConnection();
-
-    if (!empty($_POST['nom'])) {
-
-        $nom = $_POST['nom'];
-        $prenom = $_POST['prenom'];
-        $pseudo = $_POST['pseudo'];
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-        $date = $_POST['date'];
-        $description = $_POST['description'];
+        $nom = $_REQUEST['nom'];
+        $prenom = $_REQUEST['prenom'];
+        $pseudo = $_REQUEST['pseudo'];
+        $email = $_REQUEST['email'];
+        $password = $_REQUEST['password'];
+        $Hashpassword = sha1(md5(sha1($password . $email)));
+        $date = $_REQUEST['date'];
+        $description = $_REQUEST['description'];
 
         //On prépare la requête d'ajout des données dans la base avec les paramètres choisis
         //INSERT INTO `user`(`nom`, `prénom`, `pseudo`, `email`, `password`, `dateNaissance`, `description`) VALUES (,'test','test','test','test','test','1989-10-10','test')
-        $count = $dbh->prepare("INSERT INTO user(nom,prenom,pseudo,email,password,dateNaissance,description) VALUES(:nom, :prenom, :pseudo, :email, :password, :date, :description)");
+        $count = GetConnection()->prepare("INSERT INTO user(nom,prenom,pseudo,email,password,dateNaissance,description) VALUES(:nom, :prenom, :pseudo, :email, :password, :date, :description)");
 
         //On met en paramètre ce qu'on veut ajouter dans la base
         $count->bindParam(':nom', $nom, PDO::PARAM_STR);
         $count->bindParam(':prenom', $prenom, PDO::PARAM_STR);
         $count->bindParam(':pseudo', $prenom, PDO::PARAM_STR);
         $count->bindParam(':email', $email, PDO::PARAM_STR);
-        $count->bindParam(':password', $password, PDO::PARAM_STR);
+        $count->bindParam(':password', $Hashpassword, PDO::PARAM_STR);
         $count->bindParam(':date', $date, PDO::PARAM_INT);
         $count->bindParam(':description', $description, PDO::PARAM_STR);
 
@@ -50,9 +48,8 @@ function InsertUser() {
         echo 'Les champs remplis ne sont pas corrects...';
     }
 }
-var_dump($_POST);
-if(isset($_POST['envoyer']))
-{
+
+if (isset($_REQUEST['envoyer'])) {
     InsertUser();
 }
 ?>
@@ -67,7 +64,7 @@ if(isset($_POST['envoyer']))
     <body>
         <div id="Conteneur">
             <div class="threadMenu">
-                <p></p>
+                <p>Insertion Réussi</p>
             </div>
     </body>
 </html>
