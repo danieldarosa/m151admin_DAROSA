@@ -1,32 +1,27 @@
 <?php
 require_once 'Connexion.php';
 
-function LastID() {
-    $id = GetConnection()->prepare("SELECT idUser FROM user ORDER BY idUser DESC");
-    $id->execute();
-    return $id;
-}
-
 function SelectData() {
     $select = GetConnection()->prepare("SELECT * FROM user");
     $select->execute();
-    $table = $select->fetch(PDO::FETCH_ASSOC);
+    $table = $select->fetchAll(PDO::FETCH_ASSOC);
     return $table;
 }
 
 function GetData() {
 
     $data = SelectData();
-    while ($data['idUser'] != LastID()) {
+    foreach ($data as $value) {
 
-        echo ' Nom : ' . $data['nom'] . ' <br/> ';
-        echo ' Prénom : ' . $data['prenom'] . ' <br/> ';
-        echo ' Pseudo : ' . $data['pseudo'] . ' <br/> ';
-        echo ' Email : ' . $data['email'] . ' <br/> ';
-        echo ' Date de naisssance : ' . $data['dateNaissance'] . ' <br/> ';
-        echo ' Description : ' . $data['description'] . ' <br/> ';
+        echo ' Nom : ' . $value['nom'] . ' <br/> ';
+        echo ' Prénom : ' . $value['prenom'] . ' <br/> ';
+        echo ' Pseudo : ' . $value['pseudo'] . ' <br/> ';
+        echo ' Email : ' . $value['email'] . ' <br/> ';
+        echo ' Date de naisssance : ' . $value['dateNaissance'] . ' <br/> ';
+        echo ' Description : ' . $value['description'] . ' <br/> ';
+        echo '<a href="Modifier.php?id=' . $value['idUser'] . '">Modifier les données</a> <br/>';
+        echo '<a href="Supprimer.php?id=' . $value['idUser'] . '">Supprimer l\'utilisateur</a> <br/>';
         echo '<br/>';
-        $data['idUser']++;
     }
 }
 ?>
@@ -34,16 +29,18 @@ function GetData() {
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
     <head> 
         <meta http-equiv="content-type" content="test/html; charset=UTF-8" />
-        <title>Formulaire</title>
+        <title>Lecture des données</title>
         <link href="./cssProjet.css" rel="stylesheet" type="text/css" media="all" charset="UTF-8"></link>
     </head>
 
     <body>
         <div id="Conteneur">
             <div class="threadMenu">
-                <?php
-                GetData();
-                ?>
+                <form id="user" action="Modifier.php" method="post">
+                    <?php
+                    GetData();
+                    ?>
+                </form>
             </div>
         </div>
     </body>
