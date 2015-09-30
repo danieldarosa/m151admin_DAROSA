@@ -9,9 +9,10 @@ function GetUser() {
 }
 
 function UpdateUser() {
+    
+    $id = $_REQUEST['idUser'];
 
     if (!empty($_REQUEST['nom'])) {
-        $id = $_GET['id'];
         
         $nom = $_REQUEST['nom'];
         $prenom = $_REQUEST['prenom'];
@@ -54,10 +55,13 @@ if (isset($_REQUEST['envoyer'])) {
     <body>
         <div id="Conteneur">
             <div class="threadMenu">
-                <form id="modifier" action="Modifier?id='<?php $id ?>'.php" method="post" >
+                <form id="modifier" action="Modifier.php" method="post" >
                     <?php
                     $user = GetUser();
                     foreach ($user as $value) {
+                        
+                        echo'<input type="hidden" name="idUser" value="'.$value['idUser'].'" />';
+                        
                         echo '<label for="nom">Nom :</label>';
                         echo '<input id="nom" type="text" name="nom" id="nom" value="'.$value['nom'].'" required autofocus /><br/>';
                         
