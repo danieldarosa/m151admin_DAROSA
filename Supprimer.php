@@ -10,13 +10,13 @@ function GetUser() {
 }
 
 function DeleteUser() {
-    $id = $_REQUEST['idUser'];
+    $id = $_REQUEST['id'];
     $delete = GetConnection()->prepare("DELETE FROM user WHERE idUser = '$id'");
     $delete->execute();
     header('Location: ./Lire_donnees.php');
 }
 
-if (isset($_REQUEST['confrimer'])) {
+if (isset($_REQUEST['confirmer'])) {
     DeleteUser();
 }
 ?>
@@ -30,13 +30,13 @@ if (isset($_REQUEST['confrimer'])) {
     <body>
         <div id="Conteneur">
             <div class="threadMenu">
-                <form id="supprimer" action="Supprimer.php" method="post" >
+                <form id="supprimer" action="Supprimer.php" method="Get" >
                     <?php
                         $user = GetUser();
-                        echo'<input type="hidden" name="idUser" value="' . $user['idUser'] . '" />';
+                        echo'<input type="hidden" name="id" value="' . $user['idUser'] . '" />';
                         echo 'Voulez-vous supprimer cet utilisateur ?';
-                        echo '<input id="confirmer" type="submit" name="confirmer" id="button" value="Confirmer"/><br/>';
-                    ?>
+                        echo '<input id="confirmer" type="submit" name="confirmer" value="Confirmer"/><br/>';
+                    ?>               
                 </form>
             </div>
         </div>

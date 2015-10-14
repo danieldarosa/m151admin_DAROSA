@@ -1,5 +1,5 @@
 <?php
-require_once 'Connexion.php';
+require_once './FonctionsBD.php';
 
 function GetUser() {
     $id = $_GET['id'];

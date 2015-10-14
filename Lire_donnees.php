@@ -1,5 +1,5 @@
 <?php
-require_once 'Connexion.php';
+require_once './FonctionsBD.php';
 
 function SelectData() {
     $select = GetConnection()->prepare("SELECT * FROM user");
