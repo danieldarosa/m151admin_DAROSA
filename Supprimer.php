@@ -1,21 +1,6 @@
 <?php
 require_once 'Connexion.php';
 
-function GetUser() {
-    $id = $_GET['id'];
-    $data = GetConnection()->prepare("SELECT idUser FROM user WHERE idUser = $id");
-    $data->execute();
-    $line = $data->fetch(PDO::FETCH_ASSOC);
-    return $line;
-}
-
-function DeleteUser() {
-    $id = $_REQUEST['id'];
-    $delete = GetConnection()->prepare("DELETE FROM user WHERE idUser = '$id'");
-    $delete->execute();
-    header('Location: ./Lire_donnees.php');
-}
-
 if (isset($_REQUEST['confirmer'])) {
     DeleteUser();
 }
