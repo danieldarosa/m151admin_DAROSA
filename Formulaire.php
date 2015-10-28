@@ -1,3 +1,6 @@
+<?php
+require_once 'FonctionsBD.php';
+?>
 <!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
     <head> 
@@ -38,7 +41,34 @@
                         <input id="envoyer" type="submit" name="envoyer" id="button" value="Envoyez"   />
                     </fieldset>
                 </form>
-                <a href="Lire_donnees.php">Voir les utilisateurs inscrits</a>
+                <form id="connexion" action="Connexion.php" method="post" >
+                    <fieldset class="log">
+                        <legend>
+                            Connexion
+                        </legend>
+                        <table>
+                            <tr>
+                                <td>
+                                    <input type="text" name="email" id="email" placeholder="Email" required autofocus />
+                                </td>
+                            </tr>
+                            <tr>
+                                <tr>
+                                    <td>
+                                        <input type="password" name="password" id="password" placeholder="Mot de passe" required autofocus />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <tr>
+                                        <td>
+                                            <input type="submit" name="envoyer" id="envoyer" placeholder="Mot de passe" required autofocus />
+                                        </td>
+                                    </tr>
+                                </tr>
+                            </tr>
+                        </table>
+                    </fieldset>
+                </form>
             </div>
         </div>
     </body>

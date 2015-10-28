@@ -1,23 +1,21 @@
 <?php
-require_once './FonctionsBD.php';
+require_once 'FonctionsBD.php';
+
+if (isset($_REQUEST['envoyer'])) {
+    Login();
+}
 ?>
 <!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
     <head> 
         <meta http-equiv="content-type" content="test/html; charset=UTF-8" />
-        <title>Lecture des données</title>
+        <title>Formulaire</title>
         <link href="./cssProjet.css" rel="stylesheet" type="text/css" media="all" charset="UTF-8"></link>
     </head>
-
     <body>
         <div id="Conteneur">
             <div class="threadMenu">
-                <form id="user" action="Modifier.php" method="post">
-                    <?php
-                        AllowModifyUser();
-                    ?>
-                </form>
-                <a href="Logout.php">Logout</a>
+                <p>Vous n'avez pas rentré les bons champs... veuillez réessayer</p>
             </div>
         </div>
     </body>

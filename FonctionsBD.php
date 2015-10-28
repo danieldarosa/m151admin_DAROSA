@@ -68,7 +68,7 @@ function GetData() {
         echo ' Email : ' . $value['email'] . ' <br/> ';
         echo ' Date de naisssance : ' . $value['dateNaissance'] . ' <br/> ';
         echo ' Description : ' . $value['description'] . ' <br/> ';
-        echo '<a href="Modifier.php?id=' . $value['idUser'] . '">Modifier les données</a> <br/>';
+
         echo '<a href="Supprimer.php?id=' . $value['idUser'] . '">Supprimer l\'utilisateur</a> <br/>';
         echo '<br/>';
     }
@@ -83,11 +83,11 @@ function GetUser() {
 }
 
 function UpdateUser() {
-    
+
     $id = $_REQUEST['idUser'];
 
     if (!empty($_REQUEST['nom'])) {
-        
+
         $nom = $_REQUEST['nom'];
         $prenom = $_REQUEST['prenom'];
         $pseudo = $_REQUEST['pseudo'];
@@ -96,7 +96,7 @@ function UpdateUser() {
         $Hashpassword = sha1(md5(sha1($password . $email)));
         $date = $_REQUEST['date'];
         $description = $_REQUEST['description'];
-        
+
         $count = GetConnection()->prepare("UPDATE user SET nom = :nom, prenom = :prenom, pseudo = :pseudo, email = :email, password = :password, dateNaissance = :date, description = :description WHERE idUser = '$id'");
 
         $count->bindParam(':nom', $nom, PDO::PARAM_STR);
@@ -108,7 +108,7 @@ function UpdateUser() {
         $count->bindParam(':description', $description, PDO::PARAM_STR);
 
         $count->execute();
-        
+
         header('Location: ./Lire_donnees.php');
     } else {
         echo 'Les champs remplis ne sont pas corrects...';
@@ -120,6 +120,42 @@ function DeleteUser() {
     $delete = GetConnection()->prepare("DELETE FROM user WHERE idUser = '$id'");
     $delete->execute();
     header('Location: ./Lire_donnees.php');
+}
+
+function Login() {
+    $email = $_REQUEST['email'];
+    $password = $_REQUEST['password'];
+    $Hashpassword = sha1(md5(sha1($password . $email)));
+
+    $count = GetConnection()->prepare("SELECT * FROM user WHERE email='$email' AND password = '$Hashpassword'  LIMIT 1");
+
+    $count->execute();
+
+    $row = $count->fetch(PDO::FETCH_ASSOC);
+
+    if ($row != null) {
+        session_start();
+        $_SESSION['user_id'] = $row['idUser'];
+        $_SESSION['email'] = $row['email'];
+        $_SESSION['admin'] = $row['admin'];
+
+        header('Location: ./Lire_donnees.php');
+        exit();
+    }
+}
+
+function AllowModifyUser() {
+    GetData();
+    if (!empty($_SESSION['user_id'])) {
+        echo '<a href="Modifier.php?id=' . $_SESSION['user_id'] . '">Modifier les données</a> <br/>';
+    }
+}
+
+function IsAdmin() {
+    $user = GetData();
+    if ($_SESSION['admin'] == 1) {
+        echo '<a href="Supprimer.php?id=' . $user['idUser'] . '">Supprimer l\'utilisateur</a> <br/>';
+    }
 }
 
 ?>
