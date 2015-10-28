@@ -14,7 +14,7 @@ require_once './FonctionsBD.php';
             <div class="threadMenu">
                 <form id="user" action="Modifier.php" method="post">
                     <?php
-                        AllowModifyUser();
+                        GetData();
                     ?>
                 </form>
                 <a href="Logout.php">Logout</a>

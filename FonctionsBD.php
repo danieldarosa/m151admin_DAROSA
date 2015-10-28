@@ -68,8 +68,7 @@ function GetData() {
         echo ' Email : ' . $value['email'] . ' <br/> ';
         echo ' Date de naisssance : ' . $value['dateNaissance'] . ' <br/> ';
         echo ' Description : ' . $value['description'] . ' <br/> ';
-
-        echo '<a href="Supprimer.php?id=' . $value['idUser'] . '">Supprimer l\'utilisateur</a> <br/>';
+        AllowModifyUser();
         echo '<br/>';
     }
 }
@@ -145,16 +144,14 @@ function Login() {
 }
 
 function AllowModifyUser() {
-    GetData();
     if (!empty($_SESSION['user_id'])) {
         echo '<a href="Modifier.php?id=' . $_SESSION['user_id'] . '">Modifier les données</a> <br/>';
     }
 }
 
 function IsAdmin() {
-    $user = GetData();
     if ($_SESSION['admin'] == 1) {
-        echo '<a href="Supprimer.php?id=' . $user['idUser'] . '">Supprimer l\'utilisateur</a> <br/>';
+        echo '<a href="Supprimer.php?id=' . $_SESSION['user_id'] . '">Supprimer l\'utilisateur</a> <br/>';
     }
 }
 
