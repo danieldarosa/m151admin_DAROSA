@@ -1,5 +1,5 @@
 <?php
-require_once 'Connexion.php';
+require_once 'FonctionsBD.php';
 
 if (isset($_REQUEST['confirmer'])) {
     DeleteUser();
@@ -15,10 +15,10 @@ if (isset($_REQUEST['confirmer'])) {
     <body>
         <div id="Conteneur">
             <div class="threadMenu">
-                <form id="supprimer" action="Supprimer.php" method="Get" >
+                <form id="supprimer" action="Supprimer.php" method="get" >
                     <?php
-                        $user = GetUser();
-                        echo'<input type="hidden" name="id" value="' . $user['idUser'] . '" />';
+                        $id = $_GET['id'];
+                        echo'<input type="hidden" name="id" value="' . $id . '" />';
                         echo 'Voulez-vous supprimer cet utilisateur ?';
                         echo '<input id="confirmer" type="submit" name="confirmer" value="Confirmer"/><br/>';
                     ?>               

@@ -78,7 +78,8 @@ function GetUser() {
     $id = $_GET['id'];
     $data = GetConnection()->prepare("SELECT * FROM user WHERE idUser = $id");
     $data->execute();
-    return $data;
+    $user = $data->fetchAll();
+    return $user;
 }
 
 function UpdateUser() {
