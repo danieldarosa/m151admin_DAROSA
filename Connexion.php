@@ -2,7 +2,17 @@
 require_once 'FonctionsBD.php';
 
 if (isset($_REQUEST['envoyer'])) {
-    Login();
+    Login($_REQUEST['email'], $_REQUEST['password']);
+    
+    if ($row != null) {
+        session_start();
+        $_SESSION['user_id'] = $row['idUser'];
+        $_SESSION['email'] = $row['email'];
+        $_SESSION['admin'] = $row['admin'];
+    }
+    
+    header('Location: ./Lire_donnees.php');
+    exit();
 }
 ?>
 <!DOCTYPE HTML>

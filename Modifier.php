@@ -3,7 +3,8 @@ require_once './FonctionsBD.php';
 
 
 if (isset($_REQUEST['envoyer'])) {
-    UpdateUser();
+    UpdateUser($_REQUEST['idUser'], $_REQUEST['nom'], $_REQUEST['prenom'], $_REQUEST['pseudo'], $_REQUEST['email'], $_REQUEST['password'], $_REQUEST['date'], $_REQUEST['description']);
+    header('Location: ./Lire_donnees.php');
 }
 ?>
 <!DOCTYPE HTML>

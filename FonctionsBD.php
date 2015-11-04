@@ -1,5 +1,8 @@
 <?php
 
+error_reporting(E_ALL);
+ini_set("display_errors",1);
+
 function GetConnection() {
     DEFINE("HOST", "127.0.0.1");
     DEFINE("DBNAME", "m151_formulaire");
@@ -17,17 +20,9 @@ function GetConnection() {
     return $dbh;
 }
 
-function InsertUser() {
+function InsertUser($nom, $prenom, $pseudo, $email, $password, $date, $description) {
     if (!empty($_REQUEST['nom'])) {
-
-        $nom = $_REQUEST['nom'];
-        $prenom = $_REQUEST['prenom'];
-        $pseudo = $_REQUEST['pseudo'];
-        $email = $_REQUEST['email'];
-        $password = $_REQUEST['password'];
         $Hashpassword = sha1(md5(sha1($password . $email)));
-        $date = $_REQUEST['date'];
-        $description = $_REQUEST['description'];
 
         //On prépare la requête d'ajout des données dans la base avec les paramètres choisis
         //INSERT INTO `user`(`nom`, `prénom`, `pseudo`, `email`, `password`, `dateNaissance`, `description`) VALUES (,'test','test','test','test','test','1989-10-10','test')
@@ -68,7 +63,14 @@ function GetData() {
         echo ' Email : ' . $value['email'] . ' <br/> ';
         echo ' Date de naisssance : ' . $value['dateNaissance'] . ' <br/> ';
         echo ' Description : ' . $value['description'] . ' <br/> ';
-        AllowModifyUser();
+        if($value['idUser'] == $_SESSION['user_id']) {
+            AllowModifyUser();
+        }
+        
+        if($_SESSION['admin'] == 1) {
+            AllowModifyUser();
+            IsAdmin();
+        }
         echo '<br/>';
     }
 }
@@ -81,21 +83,9 @@ function GetUser() {
     return $user;
 }
 
-function UpdateUser() {
-
-    $id = $_REQUEST['idUser'];
-
-    if (!empty($_REQUEST['nom'])) {
-
-        $nom = $_REQUEST['nom'];
-        $prenom = $_REQUEST['prenom'];
-        $pseudo = $_REQUEST['pseudo'];
-        $email = $_REQUEST['email'];
-        $password = $_REQUEST['password'];
+function UpdateUser($id, $nom, $prenom, $pseudo, $email, $password, $date, $description) {
+    if (!empty($nom)) {
         $Hashpassword = sha1(md5(sha1($password . $email)));
-        $date = $_REQUEST['date'];
-        $description = $_REQUEST['description'];
-
         $count = GetConnection()->prepare("UPDATE user SET nom = :nom, prenom = :prenom, pseudo = :pseudo, email = :email, password = :password, dateNaissance = :date, description = :description WHERE idUser = '$id'");
 
         $count->bindParam(':nom', $nom, PDO::PARAM_STR);
@@ -107,23 +97,17 @@ function UpdateUser() {
         $count->bindParam(':description', $description, PDO::PARAM_STR);
 
         $count->execute();
-
-        header('Location: ./Lire_donnees.php');
     } else {
         echo 'Les champs remplis ne sont pas corrects...';
     }
 }
 
-function DeleteUser() {
-    $id = $_REQUEST['id'];
+function DeleteUser($id) {
     $delete = GetConnection()->prepare("DELETE FROM user WHERE idUser = '$id'");
     $delete->execute();
-    header('Location: ./Lire_donnees.php');
 }
 
-function Login() {
-    $email = $_REQUEST['email'];
-    $password = $_REQUEST['password'];
+function Login($email, $password) {
     $Hashpassword = sha1(md5(sha1($password . $email)));
 
     $count = GetConnection()->prepare("SELECT * FROM user WHERE email='$email' AND password = '$Hashpassword'  LIMIT 1");
@@ -131,28 +115,15 @@ function Login() {
     $count->execute();
 
     $row = $count->fetch(PDO::FETCH_ASSOC);
-
-    if ($row != null) {
-        session_start();
-        $_SESSION['user_id'] = $row['idUser'];
-        $_SESSION['email'] = $row['email'];
-        $_SESSION['admin'] = $row['admin'];
-
-        header('Location: ./Lire_donnees.php');
-        exit();
-    }
+    return $row;
 }
 
 function AllowModifyUser() {
-    if (!empty($_SESSION['user_id'])) {
-        echo '<a href="Modifier.php?id=' . $_SESSION['user_id'] . '">Modifier les données</a> <br/>';
-    }
+        echo '<a href="Modifier.php?id=' . $_SESSION['user_id'] . '">Modifier les données</a> <br/>';  
 }
 
 function IsAdmin() {
-    if ($_SESSION['admin'] == 1) {
         echo '<a href="Supprimer.php?id=' . $_SESSION['user_id'] . '">Supprimer l\'utilisateur</a> <br/>';
-    }
 }
 
 ?>

@@ -2,7 +2,8 @@
 require_once 'FonctionsBD.php';
 
 if (isset($_REQUEST['confirmer'])) {
-    DeleteUser();
+    DeleteUser($_REQUEST['id']);
+    header('Location: ./Lire_donnees.php');
 }
 ?>
 <!DOCTYPE HTML>
