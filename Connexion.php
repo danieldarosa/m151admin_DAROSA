@@ -2,8 +2,9 @@
 require_once 'FonctionsBD.php';
 
 if (isset($_REQUEST['envoyer'])) {
-    Login($_REQUEST['email'], $_REQUEST['password']);
+    $row = Login($_REQUEST['email'], $_REQUEST['password']);
     
+    var_dump($row);
     if ($row != null) {
         session_start();
         $_SESSION['user_id'] = $row['idUser'];

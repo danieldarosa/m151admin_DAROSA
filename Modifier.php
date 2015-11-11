@@ -19,7 +19,7 @@ if (isset($_REQUEST['envoyer'])) {
             <div class="threadMenu">
                 <form id="modifier" action="Modifier.php" method="post" >
                     <?php
-                    $user = GetUser();
+                    $user = GetUser($_GET['id']);
                     foreach ($user as $value) {
                         
                         echo'<input type="hidden" name="idUser" value="'.$value['idUser'].'" />';

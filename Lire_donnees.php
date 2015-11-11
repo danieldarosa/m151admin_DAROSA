@@ -1,6 +1,7 @@
 <?php
-require_once './FonctionsBD.php';
+require_once './FonctionsAffichage.php';
 session_start();
+
 ?>
 <!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
