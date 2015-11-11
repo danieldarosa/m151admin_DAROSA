@@ -21,7 +21,7 @@ function GetConnection() {
 }
 
 function InsertUser($nom, $prenom, $pseudo, $email, $password, $date, $description) {
-    if (!empty($_REQUEST['nom'])) {
+    if (!empty($_REQUEST['nom'])) { //TODO attention, pas de test avec $REQUEST ici, la fonction doit être indépendante
         $Hashpassword = sha1(md5(sha1($password . $email)));
 
         //On prépare la requête d'ajout des données dans la base avec les paramètres choisis
@@ -51,7 +51,7 @@ function SelectData() {
     $table = $select->fetchAll(PDO::FETCH_ASSOC);
     return $table;
 }
-
+//TODO séparer les fonctions d'affichage des fonctions BD dans deux fichiers différents
 function GetData() {
 
     $data = SelectData();
@@ -74,7 +74,7 @@ function GetData() {
         echo '<br/>';
     }
 }
-
+//TODO attention pas d'accès au $GET ici, il faut passer le userId en paramètre à la fonction de façon à ce qu'elle soit indépendante
 function GetUser() {
     $id = $_GET['id'];
     $data = GetConnection()->prepare("SELECT * FROM user WHERE idUser = $id");
@@ -117,7 +117,7 @@ function Login($email, $password) {
     $row = $count->fetch(PDO::FETCH_ASSOC);
     return $row;
 }
-
+//TODO est-ce que ces deux fonctions sont vraiment dans fonctionsBD ou plutôt dans la partie affichage?
 function AllowModifyUser() {
         echo '<a href="Modifier.php?id=' . $_SESSION['user_id'] . '">Modifier les données</a> <br/>';  
 }
