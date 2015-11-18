@@ -2,7 +2,7 @@
 require_once './FonctionsBD.php';
 
 if (isset($_REQUEST['envoyer'])) {
-    InsertUser($_REQUEST['nom'], $_REQUEST['prenom'], $_REQUEST['pseudo'], $_REQUEST['email'], $_REQUEST['password'], $_REQUEST['date'], $_REQUEST['description']);
+    InsertUser($_REQUEST['nom'], $_REQUEST['prenom'], $_REQUEST['pseudo'], $_REQUEST['email'], $_REQUEST['password'], $_REQUEST['date'], $_REQUEST['classe'], $_REQUEST['description']);
 }
 ?>
 <!DOCTYPE HTML>

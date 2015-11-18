@@ -13,6 +13,7 @@ function GetData() {
             echo ' Email : ' . $value['email'] . ' <br/> ';
             echo ' Date de naisssance : ' . $value['dateNaissance'] . ' <br/> ';
             echo ' Description : ' . $value['description'] . ' <br/> ';
+            echo ' Classe : ' . $value['label'] . ' <br/> ';
             if ($value['idUser'] == $_SESSION['user_id'] && $_SESSION['admin'] == 0) {
                 AllowModifyUser();
             }

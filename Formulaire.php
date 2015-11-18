@@ -15,7 +15,6 @@ if (isset($_REQUEST['envoyer'])) {
 }
 
 $email = isset($_REQUEST['email']) ? $_REQUEST['email'] : "";
-var_dump($_REQUEST['email']);
 ?>
 <!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
@@ -32,8 +31,7 @@ var_dump($_REQUEST['email']);
                         <legend>
                             Formulaire d'inscription
                         </legend>
-
-
+                        
                         <label for="nom">Nom :</label>
                         <input id="nom" type="text" name="nom" id="nom" placeholder="Nom" value="" required autofocus /><br/>
 
@@ -51,8 +49,11 @@ var_dump($_REQUEST['email']);
 
                         <label for="dateNaissance">Date de naissance :</label>
                         <input id="dateNaissance" type="date" name="date" id="age" placeholder="Votre âge" value=""/><br/>
+                        
+                        <label for="classe">Classe :</label>
+                        <select name="classe" size="1"><?php SelectClasse(); ?></select><br/>
 
-                        <label for="description">Description :</label>
+                        <label for="description">Description :</label><br/>
                         <textarea id="description" name="description" cols="50" rows="10"></textarea><br/>
                         
                         <input id="envoyer" type="submit" name="envoyer" id="button" value="Envoyez"   />

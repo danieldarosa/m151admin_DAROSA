@@ -3,7 +3,7 @@ require_once './FonctionsBD.php';
 
 
 if (isset($_REQUEST['envoyer'])) {
-    UpdateUser($_REQUEST['idUser'], $_REQUEST['nom'], $_REQUEST['prenom'], $_REQUEST['pseudo'], $_REQUEST['email'], $_REQUEST['password'], $_REQUEST['date'], $_REQUEST['description']);
+    UpdateUser($_REQUEST['idUser'], $_REQUEST['nom'], $_REQUEST['prenom'], $_REQUEST['pseudo'], $_REQUEST['email'], $_REQUEST['password'], $_REQUEST['date'], $_REQUEST['classe'], $_REQUEST['description']);
     header('Location: ./Lire_donnees.php');
 }
 ?>
@@ -38,11 +38,14 @@ if (isset($_REQUEST['envoyer'])) {
                         
                         echo '<label for="password">Nouveau mot de passe :</label>';
                         echo '<input id="password" type="password" name="password" id="password" placeholder="" required/><br/>';
-                        
+
                         echo '<label for="dateNaissance">Date de naissance :</label>';
                         echo '<input id="date" type="date"  name="date" id="date" value="'.$value['dateNaissance'].'" required/><br/>';
+                                                
+                        echo '<label for="classe">Classe :</label><br/>';
+                        echo '<select name="classe" size="1">'.SelectClasse().'</select><br/>';
                         
-                        echo '<label for="description">Description :</label>';
+                        echo '<label for="description">Description :</label><br/>';
                         echo '<textarea id="description" name="description" placeholder="'.$value['description'].'" cols="50" rows="10"></textarea>';
                         
                         echo '<input id="envoyer" type="submit" name="envoyer" id="button" value="Envoyez"/><br/>';

@@ -19,11 +19,11 @@ function GetConnection() {
     return $dbh;
 }
 
-function InsertUser($nom, $prenom, $pseudo, $email, $password, $date, $description) {
+function InsertUser($nom, $prenom, $pseudo, $email, $password, $date, $classe, $description) {
     if (!empty($nom)) {
         $Hashpassword = sha1(md5(sha1($password . $email)));
 
-        $count = GetConnection()->prepare("INSERT INTO user(nom,prenom,pseudo,email,password,dateNaissance,description) VALUES(:nom, :prenom, :pseudo, :email, :password, :date, :description)");
+        $count = GetConnection()->prepare("INSERT INTO user(nom,prenom,pseudo,email,password,dateNaissance,description,idClasse) VALUES(:nom, :prenom, :pseudo, :email, :password, :date, :description,'$classe')");
 
         $count->bindParam(':nom', $nom, PDO::PARAM_STR);
         $count->bindParam(':prenom', $prenom, PDO::PARAM_STR);
@@ -40,23 +40,23 @@ function InsertUser($nom, $prenom, $pseudo, $email, $password, $date, $descripti
 }
 
 function SelectData() {
-    $select = GetConnection()->prepare("SELECT * FROM user");
+    $select = GetConnection()->prepare("SELECT * FROM user NATURAL JOIN classes");
     $select->execute();
     $table = $select->fetchAll(PDO::FETCH_ASSOC);
     return $table;
 }
 
 function GetUser($id) {
-    $data = GetConnection()->prepare("SELECT * FROM user WHERE idUser = $id");
+    $data = GetConnection()->prepare("SELECT * FROM user NATURAL JOIN classes WHERE idUser = $id");
     $data->execute();
     $user = $data->fetchAll();
     return $user;
 }
 
-function UpdateUser($id, $nom, $prenom, $pseudo, $email, $password, $date, $description) {
+function UpdateUser($id, $nom, $prenom, $pseudo, $email, $password, $date, $classe, $description) {
     if (!empty($nom)) {
         $Hashpassword = sha1(md5(sha1($password . $email)));
-        $count = GetConnection()->prepare("UPDATE user SET nom = :nom, prenom = :prenom, pseudo = :pseudo, email = :email, password = :password, dateNaissance = :date, description = :description WHERE idUser = '$id'");
+        $count = GetConnection()->prepare("UPDATE user SET nom = :nom, prenom = :prenom, pseudo = :pseudo, email = :email, password = :password, dateNaissance = :date, description = :description, idClasse = '$classe' WHERE idUser = '$id'");
 
         $count->bindParam(':nom', $nom, PDO::PARAM_STR);
         $count->bindParam(':prenom', $prenom, PDO::PARAM_STR);
@@ -86,5 +86,15 @@ function Login($email, $password) {
 
     $row = $count->fetch(PDO::FETCH_ASSOC);
     return $row;
+}
+
+function SelectClasse() {
+    $count = GetConnection()->exec('SET NAMES utf8');
+    $count = GetConnection()->prepare("SELECT * FROM classes ");
+    $count->execute();
+
+    while ($row = $count->fetch(PDO::FETCH_ASSOC)) {
+        echo '<option value="' . $row['idClasse'] . '">' . $row['label'] . '</option><br/>';
+    }
 }
 ?>
