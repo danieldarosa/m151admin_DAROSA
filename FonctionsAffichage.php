@@ -23,7 +23,7 @@ function GetData() {
             echo '<br/>';
         }
     } else {
-        echo 'le login est faux';
+        header('Location: ./Formulaire.php');
     }
 }
 

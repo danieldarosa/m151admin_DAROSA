@@ -16,7 +16,8 @@ if (isset($_REQUEST['confirmer'])) {
     <body>
         <div id="Conteneur">
             <div class="threadMenu">
-                <form id="supprimer" action="Supprimer.php" method="get" >
+                <form id="supprimer" action="Supprimer_.php" method="get" >
+                    <h1>Suppression utilisateur</h1>
                     <?php
                         $id = $_GET['id'];
                         echo'<input type="hidden" name="id" value="' . $id . '" />';

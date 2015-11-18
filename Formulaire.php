@@ -1,13 +1,21 @@
 <?php
 require_once 'FonctionsBD.php';
 
-$nom = isset($_REQUEST['nom']) ? $_REQUEST['nom'] : "";
-$prenom = isset($_REQUEST['prenom']) ? $_REQUEST['prenom'] : "";
-$pseudo = isset($_REQUEST['pseudo']) ? $_REQUEST['pseudo'] : "";
+if (isset($_REQUEST['envoyer'])) {
+    $row = Login($_REQUEST['email'], $_REQUEST['password']);
+    
+    var_dump($row);
+    if ($row != null) {
+        session_start();
+        $_SESSION['user_id'] = $row['idUser'];
+        $_SESSION['email'] = $row['email'];
+        $_SESSION['admin'] = $row['admin'];
+        header('Location: ./Lire_donnees.php');
+    }
+}
+
 $email = isset($_REQUEST['email']) ? $_REQUEST['email'] : "";
-$password = isset($_REQUEST['password']) ? $_REQUEST['password'] : "";
-$date = isset($_REQUEST['date']) ? $_REQUEST['date'] : "";
-$description = isset($_REQUEST['description']) ? $_REQUEST['description'] : "";
+var_dump($_REQUEST['email']);
 ?>
 <!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
@@ -27,30 +35,30 @@ $description = isset($_REQUEST['description']) ? $_REQUEST['description'] : "";
 
 
                         <label for="nom">Nom :</label>
-                        <input id="nom" type="text" name="nom" id="nom" placeholder="Nom" value="<?php echo $nom; ?>" required autofocus /><br/>
+                        <input id="nom" type="text" name="nom" id="nom" placeholder="Nom" value="" required autofocus /><br/>
 
                         <label for="prenom">Prénom :</label>
-                        <input id="prenom" type="text" name="prenom" id="prenom" placeholder="Prénom" value="<?php echo $prenom; ?>" required/><br/>
+                        <input id="prenom" type="text" name="prenom" id="prenom" placeholder="Prénom" value="" required/><br/>
 
                         <label for="pseudo">Pseudonyme :</label>
-                        <input id="pseudo" type="text" name="pseudo" id="pseudo" placeholder="Pseudonyme" value="<?php echo $pseudo; ?>" required/><br/>
+                        <input id="pseudo" type="text" name="pseudo" id="pseudo" placeholder="Pseudonyme" value="" required/><br/>
 
                         <label for="email">Email :</label>
-                        <input id="email" type="email"  name="email" id="email" placeholder="email@mondomaine.com" value="<?php echo $email; ?>" required/><br/>
+                        <input id="email" type="email"  name="email" id="email" placeholder="email@mondomaine.com" value="" required/><br/>
 
                         <label for="password">Mot de passe :</label>
-                        <input id="password" type="password" name="password" id="password" placeholder="" value="<?php echo $password; ?>" required/><br/>
+                        <input id="password" type="password" name="password" id="password" placeholder="" value="" required/><br/>
 
                         <label for="dateNaissance">Date de naissance :</label>
-                        <input id="dateNaissance" type="date" name="date" id="age" placeholder="Votre âge" value="<?php echo $date; ?>"/><br/>
+                        <input id="dateNaissance" type="date" name="date" id="age" placeholder="Votre âge" value=""/><br/>
 
                         <label for="description">Description :</label>
-                        <textarea id="description" name="description" cols="50" rows="10"><?php echo $description; ?></textarea><br/>
+                        <textarea id="description" name="description" cols="50" rows="10"></textarea><br/>
                         
                         <input id="envoyer" type="submit" name="envoyer" id="button" value="Envoyez"   />
                     </fieldset>
                 </form>
-                <form id="connexion" action="Connexion.php" method="post" >
+                <form id="connexion" action="#" method="post" >
                     <fieldset class="log">
                         <legend>
                             Connexion
@@ -58,7 +66,7 @@ $description = isset($_REQUEST['description']) ? $_REQUEST['description'] : "";
                         <table>
                             <tr>
                                 <td>
-                                    <input type="text" name="email" id="email" placeholder="Email" required />
+                                    <input type="text" name="email" id="email" placeholder="Email" value="<?php echo $email; ?>" required />
                                 </td>
                             </tr>
                             <tr>
