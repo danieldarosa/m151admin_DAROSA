@@ -16,6 +16,7 @@ function GetData() {
             echo ' Classe : ' . $value['label'] . ' <br/> ';
             if ($value['idUser'] == $_SESSION['user_id'] && $_SESSION['admin'] == 0) {
                 AllowModifyUser();
+                echo '<a href="Formulaire_Inscription_Journee_Sportive.php?id='. $_SESSION['user_id'] .'&idClass='. $value['idClasse'] .'"/>Inscription à la journée sportive ';
             }
             if ($_SESSION['admin'] == 1) {
                 echo '<a href="Supprimer.php?id=' . $value['idUser'] . '">Supprimer l\'utilisateur</a> <br/>';

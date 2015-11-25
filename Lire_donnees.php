@@ -19,7 +19,6 @@ session_start();
                         GetData();
                     ?>
                 </form>
-                <a href="Formulaire_Inscription_Journee_Sportive.php">Inscription à la journée sportive</a>
                 <a href="Logout.php">Logout</a>
             </div>
         </div>

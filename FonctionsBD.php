@@ -1,6 +1,7 @@
 <?php
+
 error_reporting(E_ALL);
-ini_set("display_errors",1);
+ini_set("display_errors", 1);
 
 function GetConnection() {
     DEFINE("HOST", "127.0.0.1");
@@ -97,4 +98,30 @@ function SelectClasse() {
         echo '<option value="' . $row['idClasse'] . '">' . $row['label'] . '</option><br/>';
     }
 }
+
+function InsertStudent($nom, $prenom, $football, $streetball, $beachvolley, $frisbee, $idClass) {
+    if(!empty($nom)) {
+        $count = GetConnection()->prepare("INSERT INTO eleves(nom,prenom,idClasse) VALUES (:nom, :prenom, '$idClass'");
+        $count->execute();
+        
+        $count->bindParam(':nom', $nom, PDO::PARAM_STR);
+        $count->bindParam(':prenom', $prenom, PDO::PARAM_STR);
+        
+        $sport->bindParam(':football', $football, PDO::PARAM_STR);
+        $sport->bindParam(':streetball', $streetball, PDO::PARAM_STR);
+        $sport->bindParam(':beachvolley', $beachvolley, PDO::PARAM_STR);
+        $sport->bindParam(':frisbee', $frisbee, PDO::PARAM_STR);
+        
+        try {
+            $conn->beginTransaction();
+            
+            
+            
+            $conn->commit();
+        } catch (Exception $ex) {
+            $conn->rollback();
+        }
+    }
+}
+
 ?>
